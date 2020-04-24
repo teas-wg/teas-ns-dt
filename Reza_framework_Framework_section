@@ -1,0 +1,71 @@
+#Framework
+
+## High level architecture for management of transport slices
+
+The transport slices are part of the one or more E2E network slices
+(Ref to Transport Slice Definition Draft).  As a result, the
+management and control of transport slices is part of a higher-level
+function in the system, e.g., putting together network functions,
+radio equipment, application specific components, as well as the
+transport slices.
+
+To illustrate the role of management system for transport slices,
+let's examine Figure 1 which illustrates the overall building blocks
+for control and management of an E2E network slice.  It has the
+following functional blocks:
+
+- Customer (Tenant) portal: Initiate the creation/modification/
+  deletion of E2E network slices and receives the overall health of
+  the e2e network slice
+
+- Higher level system: This is the higher level controller or
+  orchestrator.  An example of this for 5G is the "5G E2E network
+  slice Orchestrator"
+
+- Transport Slice Controller (TSC): This functional block is the centerpoint
+  of this draft and provides the automation, monitoring, analytics, assurance
+  and closed-loop of the transport slices. This will be discuss in more details 
+  in this draft
+
+- Other Slice Controller (OSC): This controller is responsible for
+  lifecycle management of "Other Slices" and is out of scope of this
+  document.
+
+- Transport Network Controller: These are the traditional network
+  infrastructure controllers which offer the network resources.
+
+
+             +------------------------------------------+
+             |        Customer (Tenant) portal          |
+             +------------------------------------------+
+                                  A
+                                  |
+                                  V
+             +------------------------------------------+
+             |           Higher level system           |
+             |   (e.g. E2E network slice orchestrator)  |
+             +------------------------------------------+
+                                  A A
+                        OSC NBIs  | |  TSC NBIs
+                  |---------------| |-------------|
+                  V                               V
+     +------------------------+    ||============================||
+     | Other Slice Controller |    || Transport Slice Controller ||
+     +------------------------+    ||============================||
+                                                 A A
+                                                 | |  TSC SBIs
+                                    |------------| |------------|
+                                    V                           V
+                            +--------------+            +--------------+
+                            | Transport    |    ....    | Transport    |
+                            | Network      |            | Network      |
+                            | Controller #1|            | Controller #n|
+                            +--------------+            +--------------+
+
+    Legend
+       OSC: Other Slice Controller
+       TSC: Transport Slice Controller
+
+
+    Figure 1: High level architecture for management of an e2e network
+                                   slice
